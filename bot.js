@@ -4,12 +4,16 @@ const fetch = require("node-fetch");
 const cors = require("cors");
 const fs = require("fs");
 
+// ⚠️ Load environment variables from .env (if present)
+require("dotenv").config();
+
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // 🔐 Telegram ma'lumotlari
 const TOKEN = "8119491112:AAEnp06vkAXdY-6kEnRXKbzIFJjZDufznYY";
 const CHAT_ID = "6652899566";
+
 
 // 🔧 Middleware
 app.use(cors());
@@ -18,6 +22,41 @@ app.use(bodyParser.json());
 // 🗂 Fayllar mavjud bo‘lishi kerak
 if (!fs.existsSync("orders.json")) fs.writeFileSync("orders.json", "[]", "utf-8");
 if (!fs.existsSync("products.json")) fs.writeFileSync("products.json", "[]", "utf-8");
+
+// 🔌 MongoDB konfiguratsiyasi (agar kerak bo‘lsa .env fayliga MONGODB_URI qo‘shing)
+const mongoose = require("mongoose");
+const MONGO_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/anjir";
+
+// Product schema va model
+const productSchema = new mongoose.Schema({
+  id: { type: Number, unique: true, required: true },
+  name: String,
+  price: String,
+  image: String,
+  category: String,
+}, { timestamps: true });
+
+const Product = mongoose.models.Product || mongoose.model("Product", productSchema);
+
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(async () => {
+    console.log("✅ MongoDB connected");
+
+    // Agar DB bo‘sh bo‘lsa va products.json mavjud bo‘lsa, bir martalik import
+    try {
+      const count = await Product.countDocuments();
+      if (count === 0 && fs.existsSync("products.json")) {
+        const existing = JSON.parse(fs.readFileSync("products.json", "utf-8"));
+        if (Array.isArray(existing) && existing.length > 0) {
+          await Product.insertMany(existing);
+          console.log(`✅ Imported ${existing.length} products from products.json`);
+        }
+      }
+    } catch (err) {
+      console.error("Import error:", err);
+    }
+  })
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // ======================================================
 // 🧾 BUYURTMALAR
@@ -100,74 +139,70 @@ app.post("/api/orders/update", (req, res) => {
 });
 
 // ======================================================
-// 🛍 MAHSULOTLAR
+// 🛍 MAHSULOTLAR (MongoDB orqali)
 // ======================================================
 
 // 🔹 Barcha mahsulotlarni olish
-app.get("/api/products", (req, res) => {
-  const products = JSON.parse(fs.readFileSync("products.json", "utf-8"));
-  res.json(products);
+app.get("/api/products", async (req, res) => {
+  try {
+    const products = await Product.find().sort({ createdAt: -1 });
+    res.json(products);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server xatosi" });
+  }
 });
 
 // ➕ Yangi mahsulot qo‘shish
-app.post("/api/products/add", (req, res) => {
-  const { name, price, image, category } = req.body;
+app.post("/api/products/add", async (req, res) => {
+  try {
+    const { name, price, image, category } = req.body;
 
-  if (!name || !price || !image || !category)
-    return res.status(400).json({ error: "Ma'lumotlar to‘liq emas" });
+    if (!name || !price || !image || !category)
+      return res.status(400).json({ error: "Ma'lumotlar to‘liq emas" });
 
-  const products = JSON.parse(fs.readFileSync("products.json", "utf-8"));
-  const newProduct = {
-    id: Date.now(),
-    name,
-    price,
-    image,
-    category,
-  };
+    const newProduct = new Product({ id: Date.now(), name, price, image, category });
+    await newProduct.save();
 
-  products.push(newProduct);
-
-  fs.writeFileSync("products.json", JSON.stringify(products, null, 2), "utf-8");
-
-  res.json({ success: true, product: newProduct });
+    res.json({ success: true, product: newProduct });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server xatosi" });
+  }
 });
 
 // ❌ Mahsulotni o‘chirish
-app.post("/api/products/delete", (req, res) => {
-  const { id } = req.body;
-
-  const products = JSON.parse(fs.readFileSync("products.json", "utf-8"));
-  const updated = products.filter((p) => p.id !== id);
-
-  fs.writeFileSync("products.json", JSON.stringify(updated, null, 2), "utf-8");
-
-  res.json({ success: true });
+app.post("/api/products/delete", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const idNum = Number(id);
+    await Product.findOneAndDelete({ id: idNum });
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server xatosi" });
+  }
 });
 
 // ✏️ Mahsulotni tahrirlash
-app.post("/api/products/edit", (req, res) => {
-  let { id, name, price, image, category } = req.body;
+app.post("/api/products/edit", async (req, res) => {
+  try {
+    let { id, name, price, image, category } = req.body;
+    const idNum = Number(id);
 
-  id = Number(id); // 👉 ID ni numberga aylantirish
+    const product = await Product.findOneAndUpdate(
+      { id: idNum },
+      { name, price, image, category },
+      { new: true }
+    );
 
-  const products = JSON.parse(fs.readFileSync("products.json", "utf-8"));
+    if (!product) return res.status(404).json({ error: "Mahsulot topilmadi" });
 
-  // 👉 ID larni numberga aylantirib solishtiramiz
-  const index = products.findIndex((p) => Number(p.id) === id);
-
-  if (index === -1) {
-    return res.status(404).json({ error: "Mahsulot topilmadi" });
+    res.json({ success: true, product });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Server xatosi" });
   }
-
-  // 🔄 Ma’lumotlarni yangilash
-  products[index].name = name;
-  products[index].price = price;
-  products[index].image = image;
-  products[index].category = category;
-
-  fs.writeFileSync("products.json", JSON.stringify(products, null, 2), "utf-8");
-
-  res.json({ success: true, product: products[index] });
 });
 
 // ======================================================

@@ -1,0 +1,18 @@
+
+# Dependency directories
+node_modules
+node_modules/
+
+
+# Environment files
+.env.example
+.env.development.local
+.env.local
+.env.*.local
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

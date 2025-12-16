@@ -504,5 +504,182 @@
     "total": 28000,
     "status": "Yangi",
     "date": "15/11/2025, 14:46:52"
+  },
+  {
+    "id": 1763385118853,
+    "name": "Avazbek",
+    "phone": "+998-95-595-72-78",
+    "address": "Asa",
+    "cart": [
+      {
+        "id": 28,
+        "name": "Pepsi 1L",
+        "price": "11,500 so'm",
+        "image": "https://files.glotr.uz/company/000/012/826/products/2025/02/02/2025-02-02-15-36-06-983532-188f7ac5989b288328f3195345bd4e2e.webp?_=ozb9y",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 31,
+        "name": "Lipton Ice Tea",
+        "price": "13,000 so'm",
+        "image": "https://images.uzum.uz/d2eqm4niub3brtuamnc0/t_product_low.jpg",
+        "category": "Ichimliklar"
+      }
+    ],
+    "total": 24500,
+    "status": "Yangi",
+    "date": "17/11/2025, 18:11:58"
+  },
+  {
+    "id": 1763553755749,
+    "name": "Avazbek",
+    "phone": "+998-95-595-72-78",
+    "address": "gsag",
+    "cart": [
+      {
+        "name": "Coca-Cola 1.5L",
+        "price": "12,000 so'm",
+        "image": "https://static.sello.uz/unsafe/x1600/https://static.sello.uz//fm/20220524/72dd1ab0-f362-4adb-bbc2-bc043b9f2094.jpg",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 27,
+        "name": "Coca-Cola 1.5L",
+        "price": "12,000 so'm",
+        "image": "https://static.sello.uz/unsafe/x1600/https://static.sello.uz//fm/20220524/72dd1ab0-f362-4adb-bbc2-bc043b9f2094.jpg",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 35,
+        "name": "Adrenaline Rush 250ml",
+        "price": "17,000 so'm",
+        "image": "https://images.uzum.uz/cq76dghbjcvc78ism6gg/original.jpg",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 33,
+        "name": "Red Bull 250ml",
+        "price": "18,000 so'm",
+        "image": "https://olcha.uz/image/700x700/products/2023-01-16/energeticheskiy-napitok-red-bull-250-ml-190554-0.jpg",
+        "category": "Ichimliklar"
+      }
+    ],
+    "total": 59000,
+    "status": "Yangi",
+    "date": "19/11/2025, 17:02:35"
+  },
+  {
+    "id": 1763554059472,
+    "name": "Avazbek",
+    "phone": "+998-95-595-72-78",
+    "address": "ef",
+    "cart": [
+      {
+        "id": 28,
+        "name": "Pepsi 1L",
+        "price": "11,500 so'm",
+        "image": "https://files.glotr.uz/company/000/012/826/products/2025/02/02/2025-02-02-15-36-06-983532-188f7ac5989b288328f3195345bd4e2e.webp?_=ozb9y",
+        "category": "Ichimliklar"
+      }
+    ],
+    "total": 11500,
+    "status": "Yangi",
+    "date": "19/11/2025, 17:07:39"
+  },
+  {
+    "id": 1763716409002,
+    "name": "Avazbek",
+    "phone": "+998-95-595-72-78",
+    "address": "dhedh",
+    "cart": [
+      {
+        "id": 27,
+        "name": "Coca-Cola 1.5L",
+        "price": "12,000 so'm",
+        "image": "https://static.sello.uz/unsafe/x1600/https://static.sello.uz//fm/20220524/72dd1ab0-f362-4adb-bbc2-bc043b9f2094.jpg",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 30,
+        "name": "Sprite 1.5L",
+        "price": "11,000 so'm",
+        "image": "https://i5.walmartimages.com/asr/e67856af-8ff3-4d3e-94da-5d2ab4181909.08106f9c7782fea23696a7a91b7f2183.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 45,
+        "name": "Twix 50g",
+        "price": "8,000 so'm",
+        "image": "https://files.ox-sys.com/cache/original/image/cb/73/44/cb734478ec025dac2dddf2bd2b52ef21a544aeba390aadf6d355978915a90d12.jpg",
+        "category": "Shirinliklar"
+      }
+    ],
+    "total": 31000,
+    "status": "Yangi",
+    "date": "21/11/2025, 14:13:29"
+  },
+  {
+    "id": 1763716470282,
+    "name": "Avazbek",
+    "phone": "+998-95-595-72-78",
+    "address": "afgeg",
+    "cart": [
+      {
+        "id": 27,
+        "name": "Coca-Cola 1.5L",
+        "price": "12,000 so'm",
+        "image": "https://static.sello.uz/unsafe/x1600/https://static.sello.uz//fm/20220524/72dd1ab0-f362-4adb-bbc2-bc043b9f2094.jpg",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 30,
+        "name": "Sprite 1.5L",
+        "price": "11,000 so'm",
+        "image": "https://i5.walmartimages.com/asr/e67856af-8ff3-4d3e-94da-5d2ab4181909.08106f9c7782fea23696a7a91b7f2183.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 45,
+        "name": "Twix 50g",
+        "price": "8,000 so'm",
+        "image": "https://files.ox-sys.com/cache/original/image/cb/73/44/cb734478ec025dac2dddf2bd2b52ef21a544aeba390aadf6d355978915a90d12.jpg",
+        "category": "Shirinliklar"
+      }
+    ],
+    "total": 31000,
+    "status": "Yangi",
+    "date": "21/11/2025, 14:14:30"
+  },
+  {
+    "id": 1763716920468,
+    "name": "Avazbek",
+    "phone": "+998-95-595-72-78",
+    "address": "dfht",
+    "cart": [
+      {
+        "id": 27,
+        "name": "Coca-Cola 1.5L",
+        "price": "12,000 so'm",
+        "image": "https://static.sello.uz/unsafe/x1600/https://static.sello.uz//fm/20220524/72dd1ab0-f362-4adb-bbc2-bc043b9f2094.jpg",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 30,
+        "name": "Sprite 1.5L",
+        "price": "11,000 so'm",
+        "image": "https://i5.walmartimages.com/asr/e67856af-8ff3-4d3e-94da-5d2ab4181909.08106f9c7782fea23696a7a91b7f2183.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF",
+        "category": "Ichimliklar"
+      },
+      {
+        "id": 45,
+        "name": "Twix 50g",
+        "price": "8,000 so'm",
+        "image": "https://files.ox-sys.com/cache/original/image/cb/73/44/cb734478ec025dac2dddf2bd2b52ef21a544aeba390aadf6d355978915a90d12.jpg",
+        "category": "Shirinliklar"
+      }
+    ],
+    "total": 31000,
+    "status": "Yangi",
+    "date": "21/11/2025, 14:22:00"
   }
 ]
