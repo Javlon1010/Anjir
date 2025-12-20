@@ -1,4 +1,8 @@
 {
+  "name": "anjir-web-sayt",
+  "version": "1.0.0",
+  "description": "Anjir Web Sayti",
+  "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
     "dev": "nodemon bot.js",
