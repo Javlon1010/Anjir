@@ -11,6 +11,27 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CORS configuration
+const corsOptions = {
+  origin: ['http://localhost:3000', 'http://localhost:5173', 'http://127.0.0.1:3000', 'http://127.0.0.1:5173'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+// Middleware
+app.use(cors(corsOptions));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// Basic route for testing
+app.get('/', (req, res) => {
+  res.json({ status: 'Server is running', timestamp: new Date().toISOString() });
+});
+
 // 🔐 Telegram ma'lumotlari
 const TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = "1072558595";
@@ -624,7 +645,19 @@ if (bot) {
 // ======================================================
 // 🚀 SERVERNI ISHGA TUSHIRISH
 // ======================================================
-app.listen(PORT, () => {
-  console.log(`🚀 Server ${PORT}-portda ishga tushdi!`);
-  console.log(` 🤖 Bot ishga tushdi`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server http://localhost:${PORT} da ishga tushdi!`);
+  console.log(`🤖 Bot ishga tushdi`);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled Rejection:', err);
+  server.close(() => process.exit(1));
+});
+
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  server.close(() => process.exit(1));
 });
